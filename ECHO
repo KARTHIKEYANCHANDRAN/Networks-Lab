@@ -1,0 +1,49 @@
+// ECHO SERVER
+
+import java.net.*;
+import java.io.*;
+import java.util.*;
+public class EchoSe{
+public static void main(String[] args)throws Throwable{
+ServerSocket server = new ServerSocket(2500);
+Socket soc = server.accept();
+BufferedReader buffer = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+PrintStream ps = new PrintStream(soc.getOutputStream());
+String input="";
+while(!input.equals("bye")){
+input = buffer.readLine();
+System.out.println("got : "+input);
+ps.println("got : "+input);
+}
+ps.close();
+buffer.close();
+soc.close();
+server.close();
+}
+}
+
+
+// ECHO CLIENT
+
+import java.net.*;
+import java.io.*;
+import java.util.*;
+public class Echocl{
+public static void main(String[] args)throws Throwable{
+Socket client = new Socket("localhost",2500);
+BufferedReader buffer = new BufferedReader(new InputStreamReader(client.getInputStream()));
+PrintStream ps = new PrintStream(client.getOutputStream());
+String input="",echo;
+Scanner s = new Scanner(System.in);
+System.out.println("enter a message to send.Give 'bye' to exit");
+while(!input.equals("bye")){
+input = s.nextLine();
+ps.println(input);
+echo = buffer.readLine();
+System.out.println(echo);
+}
+ps.close();
+buffer.close();
+client.close();
+}
+}
