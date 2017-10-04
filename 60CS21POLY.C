@@ -1,3 +1,6 @@
+
+// Karthi is genius
+
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
